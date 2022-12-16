@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "CTP.h"
+#include "CStr.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {

@@ -15,7 +15,7 @@ int CTP::getCtpID(){
 }
 
 void CTP::run(){
-    int ctpID = CTPDLL::create();
+	int ctpID = CTPDLL::create();
     int ctpRequestID = CTPDLL::generateReqID(ctpID);
     CTPDLL::start(ctpID, ctpRequestID, "simnow_client_test", "0000000000000000", "180.168.146.187:10212", "180.168.146.187:10202", "9999", "021739", "123456");
 	while (CTPDLL::isDataOk(ctpID) <= 0){
@@ -23,9 +23,10 @@ void CTP::run(){
     }
     ctpRequestID = CTPDLL::generateReqID(ctpID);
     CTPDLL::subMarketDatas(ctpID, ctpRequestID, "cu2301,cu2302");
+	char *data = new char[1024000];
     while (true){
 		if(CTPDLL::hasNewDatas(ctpID) > 0){
-			char data[1024000] ={0};
+			memset(data, '\0', 1024000);
 			if (CTPDLL::getDepthMarketData(ctpID, data) > 0){
 				String str = FCStrEx::stringTowstring(data);
 				vector<SecurityLatestData> latestData = CTPConvert::convertToCTPDepthMarketData(str);
