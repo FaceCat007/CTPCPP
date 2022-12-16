@@ -12,6 +12,16 @@ CodeConvert_Win::CodeConvert_Win( const char* input, unsigned int fromCodePage, 
 	WideCharToMultiByte(toCodePage, 0, wcharBuf, -1, charBuf, len, 0, 0);
 }
 
+string FCStrEx::getProgramDir(){
+	char exeFullPath[MAX_PATH]; 
+	string strPath = "";
+	GetModuleFileNameA(0, exeFullPath, MAX_PATH);
+	strPath = (string)exeFullPath; 
+	int pos = (int)strPath.find_last_of('\\', strPath.length());
+	strPath = strPath.substr(0, pos);
+	return strPath;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void FCStrEx::ANSCToUnicode(string& out, const char* inSrc){

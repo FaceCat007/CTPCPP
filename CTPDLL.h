@@ -52,7 +52,6 @@ typedef int(*funcUnSubMarketDatas)(int, int, char*);
 
 class CTPDLL{
 public:
-	static string getProgramDir();
 	static void init();
 public:
 	//卖平：多单平仓

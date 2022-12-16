@@ -6,8 +6,6 @@
 #define __FCSTREX_H__
 #pragma once
 #include "stdafx.h"
-#include "objbase.h"
-#pragma comment(lib,"ole32.lib") 
 
 class CodeConvert_Win{
 public:
@@ -51,5 +49,6 @@ public:
 	static string urlEncode(const std::string& szToEncode);
 	static string urlDecode(const std::string& szToDecode);
 	static string wstringTostring(const String& strSrc);
+	static string getProgramDir();
 };
 #endif

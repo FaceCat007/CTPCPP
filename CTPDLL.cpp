@@ -44,18 +44,8 @@ funcStart m_funcStart;
 funcSubMarketDatas m_funcSubMarketDatas;
 funcUnSubMarketDatas m_funcUnSubMarketDatas;
 
-string CTPDLL::getProgramDir(){
-	char exeFullPath[MAX_PATH]; 
-	string strPath = "";
-	GetModuleFileNameA(0, exeFullPath, MAX_PATH);
-	strPath = (string)exeFullPath; 
-	int pos = (int)strPath.find_last_of('\\', strPath.length());
-	strPath = strPath.substr(0, pos);
-	return strPath;
-}
-
 void CTPDLL::init(){
-	string path = getProgramDir() + "\\iCTP.dll";
+	string path = FCStrEx::getProgramDir() + "\\iCTP.dll";
 	hdll = LoadLibraryA(path.c_str());
 	m_funcAskClose = (funcAskClose)GetProcAddress(hdll, "askClose");
 	m_funcAskCloseToday = (funcAskCloseToday)GetProcAddress(hdll, "askCloseToday");
