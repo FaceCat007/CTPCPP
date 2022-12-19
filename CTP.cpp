@@ -21,22 +21,37 @@ void CTP::run(){
 	while (CTPDLL::isDataOk(ctpID) <= 0){
         Sleep(1000);
     }
+	char *bigData = new char[1024 * 1024 * 10];
+	memset(bigData, '\0', 1024 * 1024 * 10);
+	if (CTPDLL::getInstrumentsData(ctpID, bigData) > 0){
+		String str = FCStrEx::stringTowstring(bigData);
+		vector<Security> instrumentDatas = CTPConvert::convertToCTPInstrumentDatas(str);
+		onSecurityCallBack(&instrumentDatas, ctpID);
+	}
+	memset(bigData, '\0', 1024 * 1024 * 10);
+	if (CTPDLL::getOrderInfos(ctpID, bigData) > 0){
+		String str = FCStrEx::stringTowstring(bigData);
+		vector<OrderInfo> orderInfos = CTPConvert::convertToCTPOrderList(str);
+		onOrderInfosCallBack(&orderInfos, ctpID);
+	}
+	memset(bigData, '\0', 1024 * 1024 * 10);
+	if (CTPDLL::getTradeRecords(ctpID, bigData) > 0){
+		String str = FCStrEx::stringTowstring(bigData);
+		vector<TradeRecord> tradeRecords = CTPConvert::convertToCTPTradeRecords(str);
+		onTradeRecordsCallBack(&tradeRecords, ctpID);
+	}
+	delete[] bigData;
+	bigData = 0;
     ctpRequestID = CTPDLL::generateReqID(ctpID);
     CTPDLL::subMarketDatas(ctpID, ctpRequestID, "cu2301,cu2302");
-	char *data = new char[1024000];
+	char *data = new char[102400];
     while (true){
 		if(CTPDLL::hasNewDatas(ctpID) > 0){
-			memset(data, '\0', 1024000);
+			memset(data, '\0', 102400);
 			if (CTPDLL::getDepthMarketData(ctpID, data) > 0){
 				String str = FCStrEx::stringTowstring(data);
 				vector<SecurityLatestData> latestData = CTPConvert::convertToCTPDepthMarketData(str);
 				onSecurityLatestDataCallBack(&latestData, ctpID);
-				continue;
-			}
-			if (CTPDLL::getInstrumentsData(ctpID, data) > 0){
-				String str = FCStrEx::stringTowstring(data);
-				vector<Security> instrumentDatas = CTPConvert::convertToCTPInstrumentDatas(str);
-				onSecurityCallBack(&instrumentDatas, ctpID);
 				continue;
 			}
 			if (CTPDLL::getAccountData(ctpID, data) > 0){
@@ -51,22 +66,10 @@ void CTP::run(){
 				onOrderInfoCallBack(&orderInfo, ctpID);
 				continue;
 			}
-			if (CTPDLL::getOrderInfos(ctpID, data) > 0){
-				String str = FCStrEx::stringTowstring(data);
-				vector<OrderInfo> orderInfos = CTPConvert::convertToCTPOrderList(str);
-				onOrderInfosCallBack(&orderInfos, ctpID);
-				continue;
-			}
 			if (CTPDLL::getTradeRecord(ctpID, data) > 0){
 				String str = FCStrEx::stringTowstring(data);
 				TradeRecord tradeRecord = CTPConvert::convertToCTPTrade(str);
 				onTradeRecordCallBack(&tradeRecord, ctpID);
-				continue;
-			}
-			if (CTPDLL::getTradeRecords(ctpID, data) > 0){
-				String str = FCStrEx::stringTowstring(data);
-				vector<TradeRecord> tradeRecords = CTPConvert::convertToCTPTradeRecords(str);
-				onTradeRecordsCallBack(&tradeRecords, ctpID);
 				continue;
 			}
 			if (CTPDLL::getPositionData(ctpID, data) > 0){
