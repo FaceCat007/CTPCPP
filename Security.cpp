@@ -197,8 +197,8 @@ vector<SecurityLatestData> CTPConvert::convertToCTPDepthMarketData(String str){
 			SecurityLatestData cTPDepthMarketData;
 			cTPDepthMarketData.tradingDay = results[i++];
 			cTPDepthMarketData.code = results[i++];
-			String exchangeID = results[i++];
-			String exchangeInstID = results[i++];
+			cTPDepthMarketData.exchangeID = results[i++];
+			cTPDepthMarketData.exchangeInstID = results[i++];
 			cTPDepthMarketData.lastClose = FCStrEx::convertStrToDouble(results[i++].c_str());
 			cTPDepthMarketData.preSettlementPrice = FCStrEx::convertStrToDouble(results[i++].c_str());
 			cTPDepthMarketData.preClose = FCStrEx::convertStrToDouble(results[i++].c_str());

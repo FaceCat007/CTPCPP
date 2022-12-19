@@ -94,33 +94,40 @@ void CTP::setCtpID(int ctpID){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CTP::onAccountDataCallBack(AccountData *data, int ctpID){
-
+	printf("New Fund\r\n");
 }
+
 void CTP::onInvestorPositionCallBack(vector<InvestorPosition> *data, int ctpID){
-
+	printf("New InvestorPosition\r\n");
 }
+
 void CTP::onInvestorPositionDetailCallBack(vector<InvestorPositionDetail> *data, int ctpID){
-
+	printf("New InvestorPositionDetail\r\n");
 }
+
 void CTP::onOrderInfoCallBack(OrderInfo *data, int ctpID){
-
+	printf("New OrderInfo\r\n");
 }
-void CTP:: onOrderInfosCallBack(vector<OrderInfo> *data, int ctpID){
 
+void CTP:: onOrderInfosCallBack(vector<OrderInfo> *data, int ctpID){
+	printf("OrderInfos\r\n");
 }
 
 void CTP::onSecurityCallBack(vector<Security> *data, int ctpID){
+	printf("Securities\r\n");
 }
 
 void CTP::onSecurityLatestDataCallBack(vector<SecurityLatestData> *data, int ctpID){
 	for(int i = 0; i < data->size(); i++){
 		SecurityLatestData lData = (*data)[i];
-		printf("%s=%.2f\r\n", lData.code.c_str(), lData.close);
+		printf("%s=%.2f\r\n", FCStrEx::wstringTostring(lData.code).c_str(), lData.close);
 	}
 }
+
 void CTP::onTradeRecordCallBack(TradeRecord *data, int ctpID){
-
+	printf("New TradeRecord\r\n");
 }
-void CTP::onTradeRecordsCallBack(vector<TradeRecord> *tradeRecords, int ctpID){
 
+void CTP::onTradeRecordsCallBack(vector<TradeRecord> *tradeRecords, int ctpID){
+	printf("radeRecords\r\n");
 }
