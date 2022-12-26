@@ -111,13 +111,14 @@ AccountData CTPConvert::convertToCTPTradingAccount(String result){
 
 vector<Security> CTPConvert::convertToCTPInstrumentDatas(String str){
 	vector<Security> securitis;
-	vector<String> results = FCStrEx::split(str, L":");
+	vector<String> results = FCStrEx::split(str, L";");
 	int size = (int)results.size();
 	for(int i = 0;i < size; i++){
 		vector<String> result = FCStrEx::split(results[i], L",");
 		if(result.size() >= 31){
 			Security security;
 			int j = 0;
+			security.digit = 0;
 			//合约代码
 			security.instrumentID = result[j++];
 			///交易所代码
@@ -247,99 +248,101 @@ vector<SecurityLatestData> CTPConvert::convertToCTPDepthMarketData(String str){
 
 vector<InvestorPosition> CTPConvert::convertToCTPInvestorPosition(String str){
 	vector<InvestorPosition> investorPositions;
-	vector<String> results = FCStrEx::split(str, L";");
-	int size = (int)results.size();
-	for(int i = 0; i < size; i++){
-		vector<String> result = FCStrEx::split(results[i], L",");
-		if(result.size() >= 43){
+	vector<String> result = FCStrEx::split(str, L";");
+	int size = (int)result.size();
+	for(int p = 0; p < size; p++){
+		vector<String> results = FCStrEx::split(result[p], L",");
+		if(results.size() >= 43){
 			InvestorPosition investorPosition;
-			int k = 0;
+			int i = 0;
 			///合约代码
-			investorPosition.code = result[k++];
-			///经纪公司代码
-			investorPosition.brokerID = result[k++];
-			///投资者代码
-			investorPosition.investorID = result[k++];
-			///持仓多空方向
-			investorPosition.posiDirection = result[k++];
-			///投机套保标志
-			investorPosition.hedgeFlag = result[k++];
-			///持仓日期
-			investorPosition.positionDate = result[k++];
-			///上日持仓
-			investorPosition.ydPosition = FCStrEx::convertStrToInt(result[k++].c_str());
-			///今日持仓
-			investorPosition.position = FCStrEx::convertStrToInt(result[k++].c_str());
-			///多头冻结
-			investorPosition.longFrozen = FCStrEx::convertStrToInt(result[k++].c_str());
-			///空头冻结
-			investorPosition.shortFrozen = FCStrEx::convertStrToInt(result[k++].c_str());
-			///开仓冻结金额
-			investorPosition.longFrozenAmount = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///开仓冻结金额
-			investorPosition.shortFrozenAmount = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///开仓量
-			investorPosition.openVolume = FCStrEx::convertStrToInt(result[k++].c_str());
-			///平仓量
-			investorPosition.closeVolume = FCStrEx::convertStrToInt(result[k++].c_str());
-			///开仓金额
-			investorPosition.openAmount = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///平仓金额
-			investorPosition.closeAmount = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///持仓成本
-			investorPosition.positionCost = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///上次占用的保证金
-			investorPosition.preMargin = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///占用的保证金
-			investorPosition.useMargin = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///冻结的保证金
-			investorPosition.frozenMargin = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///冻结的资金
-			investorPosition.frozenCash = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///冻结的手续费
-			investorPosition.frozenCommission = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///资金差额
-			investorPosition.cashIn = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///手续费
-			investorPosition.commission = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///平仓盈亏
-			investorPosition.closeProfit = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///持仓盈亏
-			investorPosition.positionProfit = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///上次结算价
-			investorPosition.preSettlementPrice = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///本次结算价
-			investorPosition.settlementPrice = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///交易日
-			investorPosition.tradingDate = result[k++];
-			///结算编号
-			investorPosition.settlementID = FCStrEx::convertStrToInt(result[k++].c_str());
-			///开仓成本
-			investorPosition.openCost = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///交易所保证金
-			investorPosition.exchangeMargin = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///组合成交形成的持仓
-			investorPosition.combPosition = FCStrEx::convertStrToInt(result[k++].c_str());
-			///组合多头冻结
-			investorPosition.combLongFrozen = FCStrEx::convertStrToInt(result[k++].c_str());
-			///组合空头冻结
-			investorPosition.combShortFrozen = FCStrEx::convertStrToInt(result[k++].c_str());
-			///逐日盯市平仓盈亏
-			investorPosition.closeProfitByDate = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///逐笔对冲平仓盈亏
-			investorPosition.closeProfitByTrade = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///今日持仓
-			investorPosition.todayPosition = FCStrEx::convertStrToInt(result[k++].c_str());
-			///保证金率
-			investorPosition.marginRateByMoney = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///保证金率(按手数)
-			investorPosition.marginRateByVolume = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///执行冻结
-			investorPosition.strikeFrozen = FCStrEx::convertStrToInt(result[k++].c_str());
-			///执行冻结金额
-			investorPosition.strikeFrozenAmount = FCStrEx::convertStrToDouble(result[k++].c_str());
-			///放弃执行冻结
-			investorPosition.abandonFrozen = FCStrEx::convertStrToInt(result[k++].c_str());
+            investorPosition.code = results[i++];
+            ///经纪公司代码
+            investorPosition.brokerID = results[i++];
+            ///投资者代码
+            investorPosition.investorID = results[i++];
+            ///持仓多空方向
+            investorPosition.posiDirection = results[i++];
+            ///投机套保标志
+            investorPosition.hedgeFlag = results[i++];
+            ///持仓日期
+            investorPosition.positionDate = results[i++];
+            ///上日持仓
+            investorPosition.ydPosition = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///今日持仓
+            investorPosition.position = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///多头冻结
+            investorPosition.longFrozen = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///空头冻结
+            investorPosition.shortFrozen = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///开仓冻结金额
+            investorPosition.longFrozenAmount = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///开仓冻结金额
+            investorPosition.shortFrozenAmount = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///开仓量
+            investorPosition.openVolume = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///平仓量
+            investorPosition.closeVolume = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///开仓金额
+            investorPosition.openAmount = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///平仓金额
+            investorPosition.closeAmount = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///持仓成本
+            investorPosition.positionCost = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///上次占用的保证金
+            investorPosition.preMargin = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///占用的保证金
+            investorPosition.useMargin = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///冻结的保证金
+            investorPosition.frozenMargin = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///冻结的资金
+            investorPosition.frozenCash = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///冻结的手续费
+            investorPosition.frozenCommission = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///资金差额
+            investorPosition.cashIn = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///手续费
+            investorPosition.margin = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///平仓盈亏
+            investorPosition.floatProfit = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///持仓盈亏
+            investorPosition.positionProfit = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///上次结算价
+            investorPosition.preSettlementPrice = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///本次结算价
+            investorPosition.settlementPrice = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///交易日
+            investorPosition.tradingDate = results[i++];
+            ///结算编号
+            investorPosition.settlementID = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///开仓成本
+            investorPosition.openCost = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///交易所保证金
+            investorPosition.exchangeMargin = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///组合成交形成的持仓
+            investorPosition.combPosition = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///组合多头冻结
+            investorPosition.combLongFrozen = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///组合空头冻结
+            investorPosition.combShortFrozen = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///逐日盯市平仓盈亏
+            investorPosition.closeProfitByDate = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///逐笔对冲平仓盈亏
+            investorPosition.closeProfitByTrade = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///今日持仓
+            investorPosition.todayPosition = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///保证金率
+            investorPosition.marginRateByMoney = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///保证金率(按手数)
+            investorPosition.marginRateByVolume = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///执行冻结
+            investorPosition.strikeFrozen = FCStrEx::convertStrToInt(results[i++].c_str());
+            ///执行冻结金额
+            investorPosition.strikeFrozenAmount = FCStrEx::convertStrToDouble(results[i++].c_str());
+            ///放弃执行冻结
+            investorPosition.abandonFrozen = FCStrEx::convertStrToInt(results[i++].c_str());
+            //开仓均价
+            investorPosition.openPrice = FCStrEx::convertStrToInt(results[i++].c_str());
 			investorPositions.push_back(investorPosition);
 		}
 	}
@@ -589,6 +592,8 @@ TradeRecord CTPConvert::convertToCTPTrade(String str){
 		tradeRecord.brokerOrderSeq = FCStrEx::convertStrToInt(result[i++].c_str());
 		///成交来源
 		tradeRecord.tradeSource = result[i++];
+		///手续费
+		tradeRecord.commission = FCStrEx::convertStrToDouble(result[i++].c_str());
 	}
 	return tradeRecord;
 }

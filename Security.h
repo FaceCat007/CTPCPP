@@ -319,6 +319,8 @@ public:
 	int longFrozen;
 	// 多头冻结金额
 	double longFrozenAmount;
+	//保证金
+    double margin;
 	// 保证金率
 	double marginRateByMoney;
 	// 保证金率(按手数)
@@ -363,7 +365,10 @@ public:
 	double useMargin;
 	//上日持仓
 	int ydPosition;
-
+	//浮动盈亏
+    double floatProfit;
+	//开仓价格
+    double openPrice;
 	//获取可用仓位
 	int getAvailablePosition(){
 		int position = 0;
@@ -687,6 +692,8 @@ public:
 	String clientID;
 	//合约代码
 	String code;
+	//手续费
+    double commission;
 	//买卖方向
 	String direction;
 	//市场代码
