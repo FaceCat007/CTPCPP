@@ -610,3 +610,36 @@ vector<TradeRecord> CTPConvert::convertToCTPTradeRecords(String str){
 	}
 	return  tradeRecords;
 }
+
+CommissionRate CTPConvert::convertToCTPCommissionRate(String result){
+	CommissionRate cTPCommissionRate;
+	vector<String> results = FCStrEx::split(result, L",");
+	int i = 0;
+	cTPCommissionRate.code = results[i++];
+    cTPCommissionRate.investorRange = results[i++];
+    cTPCommissionRate.brokerID = results[i++];
+    cTPCommissionRate.investorID = results[i++];
+    cTPCommissionRate.openRatioByMoney = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPCommissionRate.openRatioByVolume = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPCommissionRate.closeRatioByMoney = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPCommissionRate.closeRatioByVolume = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPCommissionRate.closeTodayRatioByMoney = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPCommissionRate.closeTodayRatioByVolume = FCStrEx::convertStrToDouble(results[i++].c_str());
+	return cTPCommissionRate;
+}
+
+MarginRate CTPConvert::convertToCTPMarginRate(String result){
+	vector<String> results = FCStrEx::split(result, L",");
+	int i = 0;
+	MarginRate cTPMarginRate;
+	cTPMarginRate.code = results[i++];
+    cTPMarginRate.brokerID = results[i++];
+    cTPMarginRate.investorID = results[i++];
+    cTPMarginRate.hedgeFlag = results[i++];
+	cTPMarginRate.longMarginRatioByMoney = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPMarginRate.longMarginRatioByVolume = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPMarginRate.shortMarginRatioByMoney = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPMarginRate.shortMarginRatioByVolume = FCStrEx::convertStrToDouble(results[i++].c_str());
+    cTPMarginRate.isRelativel = FCStrEx::convertStrToInt(results[i++].c_str());
+	return cTPMarginRate;
+}

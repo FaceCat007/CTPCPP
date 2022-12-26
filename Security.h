@@ -764,6 +764,10 @@ public:
 	static TradeRecord convertToCTPTrade(String result);
 	//转换CTP交易信息列表
 	static vector<TradeRecord> convertToCTPTradeRecords(String result);
+	//转换成CTP手续费率
+	static CommissionRate convertToCTPCommissionRate(String result);
+	//转换CTP保证金率
+	static MarginRate convertToCTPMarginRate(String result);
 };
 
 #endif
