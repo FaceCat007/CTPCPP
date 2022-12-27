@@ -13,17 +13,27 @@
 #include "FileAppenderConfig.h"
 
 namespace FaceCat{
-    // 滚动文件输出型日志的配置文件
+    /*
+	* 滚动文件输出型日志的配置文件
+	*/
     class __ROLLINGFILEAPPENDERCONFIG_H__ RollingFileAppenderConfig : public FileAppenderConfig{
 	public:
-		// 构造函数
+		/*
+		* 构造函数
+		*/
 		RollingFileAppenderConfig();
-		// 析构函数
+		/*
+		* 析构函数
+		*/
 		virtual ~RollingFileAppenderConfig();
 	public:
-		// 单个日志文件大小
+		/*
+		* 单个日志文件大小
+		*/
         String m_wstrMaxFileSize;
-        // log保留个数
+        /*
+		* log保留个数
+		*/
         int m_maxSizeRollBackups;
     };
 }

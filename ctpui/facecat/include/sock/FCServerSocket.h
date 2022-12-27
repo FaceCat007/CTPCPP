@@ -63,6 +63,7 @@ namespace FaceCat{
 		int m_port;
 		RecvMsg m_recvEvent;
 		WriteServerLog m_writeLogEvent;
+		char m_token[4];
 	public:
 		/*
 		* 创建服务端socket

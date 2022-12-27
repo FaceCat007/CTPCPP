@@ -223,7 +223,7 @@ namespace FaceCat{
 		* 启动
 		* @param  port  端口
 		*/
-		static int startServer(int port);
+		static int startServer(int port, char *token);
 	public:
 		/*
 		* 构造函数

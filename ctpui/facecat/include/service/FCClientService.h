@@ -64,7 +64,7 @@ namespace FaceCat{
 		* @param  proxyDomain  代理域
 		* @param  timeout  超时
 		*/
-		static int connectToServer(int proxyType, const char *ip, int port, const char *proxyIp, int proxyPort, const char *proxyUserName, const char *proxyUserPwd, const char *proxyDomain, int timeout);
+		static int connectToServer(int proxyType, const char *ip, int port, const char *proxyIp, int proxyPort, const char *proxyUserName, const char *proxyUserPwd, const char *proxyDomain, int timeout, char *token);
 		/**
 		 * 注册回调
 		 */

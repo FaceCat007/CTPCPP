@@ -55,7 +55,7 @@ namespace FaceCat
 		/*
 		* 启动服务端
 		*/
-		static int start(int port);
+		static int start(int port, char *token);
 		/*
          * 设置限制
          */

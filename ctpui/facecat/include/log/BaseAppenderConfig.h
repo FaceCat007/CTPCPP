@@ -12,29 +12,45 @@
 #include "..\\..\\stdafx.h"
 
 namespace FaceCat{
-	// 日志配置文件的基类
+	/*
+	* 日志配置文件的基类
+	*/
 	class __BASEAPPENDERCONFIG_H__ BaseAppenderConfig{
 	public:
-		// 构造函数
+		/*
+		* 构造函数
+		*/
 		BaseAppenderConfig();
-		// 析构函数
+		/*
+		* 析构函数
+		*/
 		virtual ~BaseAppenderConfig();
-
 	public:
-		// 日志的输入模式
+		/*
+		* 日志的输入模式
+		*/
 		String m_logPatten;
-		// 日志的级别
-		// 1：调试模式
-		// 2：信息模式
-		// 3：警告模式
-		// 4：错误模式
-		// 5：致命错误
+		/*
+		* 日志的级别
+		* 1：调试模式
+		* 2：信息模式
+		* 3：警告模式
+		* 4：错误模式
+		* 5：致命错误
+		*/
 		int m_logType;
-		// 日志配置的名称
+		/*
+		* 日志配置的名称
+		*/
 		String m_name;
-		// 日志配置的类型
+		/*
+		* 日志配置的类型
+		*/
 		String m_type;
-		// 加载配置文件
+		/*
+		* 加载配置文件
+		* @param configPath 配置文件
+		*/
 		virtual bool loadConfig(const String &configPath);
 	};
 }

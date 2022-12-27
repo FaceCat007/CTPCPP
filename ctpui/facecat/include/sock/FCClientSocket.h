@@ -94,6 +94,7 @@ namespace FaceCat{
 		string m_proxyUserName;  
 		string m_proxyUserPwd;
 		int m_timeout;
+		char m_token[4];
 	private:
 		/*
 		* 标准连接
@@ -124,7 +125,7 @@ namespace FaceCat{
 		/*
 		* 创建客户端socket
 		*/
-		FCClientSocket(int proxyType, const string &ip, u_short port, const string &proxyIp, u_short proxyPort, const string &proxyUserName, const string &proxyUserPwd, const string &proxyDomain, int timeout);
+		FCClientSocket(int proxyType, const string &ip, u_short port, const string &proxyIp, u_short proxyPort, const string &proxyUserName, const string &proxyUserPwd, const string &proxyDomain, int timeout, char *token);
 		/*
 		* 销毁对象
 		*/

@@ -38,7 +38,7 @@ namespace FaceCat{
 		/*
 		* 连接
 		*/
-		static int connect(int proxyType, const char *ip, int port, const char *proxyIp, int proxyPort, const char *proxyUserName, const char *proxyUserPwd, const char *proxyDomain, int timeout);
+		static int connect(int proxyType, const char *ip, int port, const char *proxyIp, int proxyPort, const char *proxyUserName, const char *proxyUserPwd, const char *proxyDomain, int timeout, char *token);
 		/*
 		* 注册日志回调
 		*/

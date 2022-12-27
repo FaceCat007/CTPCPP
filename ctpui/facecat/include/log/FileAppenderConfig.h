@@ -13,19 +13,32 @@
 #include "BaseAppenderConfig.h"
 
 namespace FaceCat{
-	// 文件输出型日志的配置文件
+	/*
+	* 文件输出型日志的配置文件
+	*/
 	class __FILEAPPENDERCONFIG_H__ FileAppenderConfig : public BaseAppenderConfig{
 	public:
-		// 构造函数
+		/*
+		* 构造函数
+		*/
 		FileAppenderConfig();
-		// 析构函数
+		/*
+		* 析构函数
+		*/
 		virtual ~FileAppenderConfig();
 	public:
-		// 日志文件的名称
+		/*
+		* 日志文件的名称
+		*/
 		String m_logFile;
-		// 时间格式
+		/*
+		* 时间格式
+		*/
 		String m_datePattern;
-		// 加载配置文件
+		/*
+		* 加载配置文件
+		* @param configPath 配置文件
+		*/
 		bool loadConfig(const String &configPath);
 	};
 }
